@@ -1,5 +1,6 @@
 from cryptography.hazmat.primitives import hashes
 import datetime
+import prettytable
 from halo import Halo
 
 
@@ -25,15 +26,18 @@ def calculate_hash(index, previous_hash, timestamp, b_data, complexity):
             nonce = nonce + 1
     time_ended = datetime.datetime.now()
 
-    print("|started\t\t|\t" + str(time_started))
-    print("|index\t\t\t|\t" + str(index))
-    print("|previous_hash\t|\t" + str(previous_hash))
-    print("|timestamp\t\t|\t" + str(timestamp))
-    print("|block data\t\t|\t" + b_data)
-    print("|nonce\t\t\t|\t" + str(nonce-1))
-    print("|new hash\t\t|\t" + c_hash)
-    print("|ended\t\t\t|\t" + str(time_ended))
-    print("|elapsed|\t\t|\t" + str(time_ended - time_started))
+    table = prettytable.PrettyTable(["Data", "Value"])
+    table.align = "l"
+    table.add_row(["Started", str(time_started)])
+    table.add_row(["Block Index", str(index)])
+    table.add_row(["Previous Hash", str(previous_hash)])
+    table.add_row(["Timestamp", str(timestamp)])
+    table.add_row(["Block Data", b_data])
+    table.add_row(["Nonce", str(nonce-1)])
+    table.add_row(["New Hash", c_hash])
+    table.add_row(["Ended", str(time_ended)])
+    table.add_row(["Elapsed Time", str(time_ended - time_started)])
+    print(table)
 
     return c_hash
 

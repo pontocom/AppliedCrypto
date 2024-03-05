@@ -1,4 +1,5 @@
 import sqlite3, os, base64
+import prettytable
 from sqlite3 import Error
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
@@ -22,11 +23,21 @@ def create_table(conn, sql):
 
 
 def create_user(conn, user):
-    sql = ''' INSERT INTO users(username, password) VALUES(?,?) '''
+    sql = ''' INSERT INTO users(username, salt, password) VALUES(?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, user)
     conn.commit()
     return True
+
+
+def get_salt(conn, user):
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM users WHERE username=?', [user])
+    row = cur.fetchone()
+    if row is None:
+        return False
+    else:
+        return row[1]
 
 
 def check_account(conn, user, password):
@@ -39,18 +50,21 @@ def check_account(conn, user, password):
 
 
 def list_all_accounts(conn):
+    table = prettytable.PrettyTable(["Username", "Salt", "Password"])
     cur = conn.cursor()
     cur.execute("SELECT * FROM users")
     rows = cur.fetchall()
     for row in rows:
-        print("["+row[0]+"] ["+row[1]+"]")
+        table.add_row(row)
+        # print("["+row[0]+"] ["+row[1]+"]")
+    print(table)
 
 
 if __name__ == '__main__':
-    salt = b'7c00a526398dfb67737b29c6ef4f378c'
     c = create_connection()
     sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS users (
                                             username text PRIMARY KEY,
+                                            salt text NOT NULL,
                                             password text NOT NULL
                                         ); """
     create_table(c, sql_create_projects_table)
@@ -66,11 +80,15 @@ if __name__ == '__main__':
         if option == '1':
             username = input("Username: ")
             password = input("Password: ")
+            salt = get_salt(c, username)
+            if not salt:
+                print("Wrong username!!!")
+                continue
             passphrase = password.encode('utf8')
             kdf = PBKDF2HMAC(
                 algorithm=hashes.SHA3_256(),
                 length=32,
-                salt=salt,
+                salt=bytes.fromhex(salt),
                 iterations=100000
             )
             key = base64.urlsafe_b64encode(kdf.derive(passphrase))
@@ -81,6 +99,7 @@ if __name__ == '__main__':
         elif option == '2':
             username = input("Username: ")
             password = input("Password: ")
+            salt = os.urandom(16)
             passphrase = password.encode('utf8')
             kdf = PBKDF2HMAC(
                 algorithm=hashes.SHA3_256(),
@@ -89,7 +108,7 @@ if __name__ == '__main__':
                 iterations=100000
             )
             key = base64.urlsafe_b64encode(kdf.derive(passphrase))
-            user = (username, key.hex())
+            user = (username, salt.hex(), key.hex())
             create_user(c, user)
         elif option == '3':
             list_all_accounts(c)
