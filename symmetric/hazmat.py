@@ -23,8 +23,8 @@ print("Ciphertext = " + str(base64.b64encode(ciphertext)))
 decryptor = cipher.decryptor()
 plaintext = decryptor.update(ciphertext) + decryptor.finalize()
 
-#unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
-#data = unpadder.update(plaintext)
-#plaintext_data = data + unpadder.finalize()
+unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
+data = unpadder.update(plaintext)
+plaintext_data = data + unpadder.finalize()
 
 print("Plaintext = " + str(plaintext.decode('utf-8')))

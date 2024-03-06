@@ -3,19 +3,23 @@ import base64
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
-mode = "CBC"
+mode = "ECB"
+headerbytes = bytes(open("tux_original.bmp", "rb").read(54))
+
+with(open("tux_original.bmp", "rb")) as f:
+    all = f.read()
+    tbr = len(all) - 54
+    f.seek(55)
+    bodybytes = f.read(tbr)
 
 with(open("tux_original.bmp", "rb")) as f:
     file = f.read()
-
-head = file[:54]
-body = file[55:]
 
 key = os.urandom(32)
 iv = os.urandom(16)
 print("KEY = " + str(base64.b64encode(key)))
 
-cleartext = body
+cleartext = bodybytes
 
 if len(cleartext) % 16 != 0:
     padder = padding.PKCS7(algorithms.AES.block_size).padder()
@@ -30,10 +34,9 @@ if mode == "CBC":
 encryptor = cipher.encryptor()
 ciphertext = encryptor.update(cleartext) + encryptor.finalize()
 
-image = head + ciphertext
-
 with(open("tux_" + mode + ".bmp", "wb+")) as f:
-    f.write(image)
+    f.write(headerbytes)
+    f.write(ciphertext)
 
 f.close()
 
