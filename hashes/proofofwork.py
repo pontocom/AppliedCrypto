@@ -43,7 +43,7 @@ def calculate_hash(index, previous_hash, timestamp, b_data, complexity):
 
 
 if __name__ == '__main__':
-    complexity = 6
+    complexity = 3
     index = 0
     genesys_block_hash = '0000000000000000000000000000000000000000000000000000000000000000'
     data = ''
