@@ -3,7 +3,8 @@ import base64
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
-mode = "CBC"
+# change "mode" to other modes (CBC, ECB, OFB, CFB) to check the differences in the image
+mode = "CFB"
 
 with(open("tux_original.bmp", "rb")) as f:
     file = f.read()
@@ -27,6 +28,11 @@ if mode == "ECB":
     cipher = Cipher(algorithms.AES(key), modes.ECB())
 if mode == "CBC":
     cipher = Cipher(algorithms.AES(key), modes.CBC(iv))
+if mode == "OFB":
+    cipher = Cipher(algorithms.AES(key), modes.OFB(iv))
+if mode == "CFB":
+    cipher = Cipher(algorithms.AES(key), modes.CFB(iv))
+
 encryptor = cipher.encryptor()
 ciphertext = encryptor.update(cleartext) + encryptor.finalize()
 
