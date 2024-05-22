@@ -5,3 +5,11 @@ certificate.pem
 key.pem
 privkey.pem
 pubkey.pem
+ca/ca.crt
+ca/certs.db
+ca/DemoServerTest.key
+tls/ca.crt
+tls/DemoServerTest.crt
+tls/DemoServerTest.key
+ca/Teste.csr
+ca/Teste.key
