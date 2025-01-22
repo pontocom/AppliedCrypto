@@ -13,3 +13,4 @@ tls/DemoServerTest.crt
 tls/DemoServerTest.key
 ca/Teste.csr
 ca/Teste.key
+/ca/certs.crl
