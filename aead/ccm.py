@@ -1,4 +1,5 @@
 import os
+
 from cryptography.hazmat.primitives.ciphers.aead import AESCCM
 
 data = b"this is the message that i want to encrypt"
@@ -22,3 +23,4 @@ print(ct.hex())
 dt = aesccm.decrypt(nonce, ct, aad)
 
 print(dt)
+

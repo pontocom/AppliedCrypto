@@ -29,6 +29,7 @@ issuer = x509.Name([
     x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, "Lisboa"),
     x509.NameAttribute(NameOID.LOCALITY_NAME, "Lisboa"),
     x509.NameAttribute(NameOID.ORGANIZATION_NAME, "Iscte-Sintra"),
+    x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, "Escola de Tecnologias Digitais"),
     x509.NameAttribute(NameOID.COMMON_NAME, "ISCTE CA")
 ])
 
