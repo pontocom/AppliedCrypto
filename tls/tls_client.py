@@ -22,3 +22,4 @@ from_server = str(client.recv(4096), encoding='utf-8')
 print(from_server)
 
 client.close()
+
