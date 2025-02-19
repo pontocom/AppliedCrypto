@@ -1,5 +1,5 @@
-from cryptography.hazmat.primitives import hashes
 import datetime
+from cryptography.hazmat.primitives import hashes
 import prettytable
 from halo import Halo
 
