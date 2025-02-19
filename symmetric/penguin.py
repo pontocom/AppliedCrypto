@@ -4,7 +4,7 @@ from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
 # change "mode" to other modes (CBC, ECB, OFB, CFB) to check the differences in the image
-mode = "CFB"
+mode = "ECB"
 
 with(open("tux_original.bmp", "rb")) as f:
     file = f.read()
@@ -14,6 +14,7 @@ body = file[55:]
 
 key = os.urandom(32)
 iv = os.urandom(16)
+
 print("KEY = " + str(base64.b64encode(key)))
 
 cleartext = body
