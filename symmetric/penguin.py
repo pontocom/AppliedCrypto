@@ -43,4 +43,3 @@ with(open("tux_" + mode + ".bmp", "wb+")) as f:
     f.write(image)
 
 f.close()
-

@@ -14,3 +14,4 @@ tls/DemoServerTest.key
 ca/Teste.csr
 ca/Teste.key
 /ca/certs.crl
+.vscode/settings.json
