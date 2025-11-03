@@ -1,3 +1,6 @@
+'''
+This sample demonstrates how to use the ECDH (Elliptic Curve Diffie Helman) method to generate a common encryption key
+'''
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF

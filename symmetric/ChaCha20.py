@@ -16,9 +16,9 @@ cipher = Cipher(algorithms.ChaCha20(key, full_nonce), mode=None)
 encryptor = cipher.encryptor()
 
 ciphertext = encryptor.update(cleartext) + encryptor.finalize()
-print("Ciphertext = " + str(base64.b64encode(ciphertext)))
+print(f'Ciphertext = {str(base64.b64encode(ciphertext))}')
 
 decryptor = cipher.decryptor()
 plaintext = decryptor.update(ciphertext) + decryptor.finalize()
 
-print("Plaintext = " + str(plaintext.decode('utf-8')))
+print(f'Plaintext = {str(plaintext.decode("utf-8"))}')

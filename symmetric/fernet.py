@@ -6,7 +6,7 @@ print(key)
 f = Fernet(key)
 encrypted = f.encrypt(b'This is my super secret message!!!')
 
-print("Encrypted: " + str(encrypted))
+print(f'Encrypted: {str(encrypted)}')
 
 decrypted = f.decrypt(encrypted)
-print("Decrypted: " + str(decrypted))
+print(f'Decrypted: {str(decrypted)}')
