@@ -15,3 +15,6 @@ ca/Teste.csr
 ca/Teste.key
 /ca/certs.crl
 .vscode/settings.json
+ca/requests/HomeFeijoServer.csr
+AppliedCrypto.code-workspace
+.gitignore
