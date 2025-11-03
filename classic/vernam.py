@@ -34,7 +34,7 @@ if __name__ == "__main__":
     key =     "XPTO12"  # key must match length
 
     cipher = vernam_encrypt(message, key)
-    print("Cipher (raw chars):", cipher)
+    print(f'Cipher (raw chars): {cipher}')
 
     plain = vernam_decrypt(cipher, key)
-    print("Decrypted:", plain)
+    print(f'Decrypted: {plain}')
