@@ -3,10 +3,11 @@ import base64
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
-key = os.urandom(32)
+# key = os.urandom(16)
+key = b'QqfTttneYm+L3lVLbIc4vA=='
 print(f'KEY = {str(base64.b64encode(key))}')
 
-cleartext = b'This is my super duper secret message!'
+cleartext = b'Local da descarga: 38.489726198410345, -8.911551280242712; Dia: 31/12/2025; Hora:23:45'
 
 if len(cleartext) % 16 != 0:
     padder = padding.PKCS7(algorithms.AES.block_size).padder()
