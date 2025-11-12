@@ -1,0 +1,1 @@
+Here you can find some examples developed in Python related to symmetric encryption using different types of algorithms.
