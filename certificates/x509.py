@@ -16,7 +16,7 @@ with open("./key.pem", "wb") as f:
         encryption_algorithm=serialization.BestAvailableEncryption(b"password")
     ))
 
-subject = x509.Name([
+subject = issuer = x509.Name([
     x509.NameAttribute(NameOID.COUNTRY_NAME, "PT"),
     x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, "Lisboa"),
     x509.NameAttribute(NameOID.LOCALITY_NAME, "Lisboa"),

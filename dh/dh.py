@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import dh
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
-parameters = dh.generate_parameters(generator=5, key_size=1024)
+parameters = dh.generate_parameters(generator=5, key_size=2048)
 
 print("p = " + str(parameters.parameter_numbers().p))
 print("g = " + str(parameters.parameter_numbers().g))

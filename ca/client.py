@@ -47,4 +47,3 @@ if __name__ == '__main__':
         f.write(csr.public_bytes(serialization.Encoding.PEM))
 
     print("Done!")
-
